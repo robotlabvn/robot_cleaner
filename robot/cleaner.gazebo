@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<robot>
+<!-- Defining skid-steer controller parameters. --> 
+  <gazebo reference="link_chassis">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="link_left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="link_right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+ <!-- Defining the ohmni  wheels controller plugin. -->
+  <gazebo>
+    <plugin name="gazebo_ros_mecanum_diff_drive" filename="libgazebo_ros_mecanum_drive.so">
+      <updateRate>50.0</updateRate>
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+      <robotNamespace></robotNamespace>
+
+      <LeftFront>joint_left_front_wheel</LeftFront>
+      <RightFront>joint_right_front_wheel</RightFront>
+      <LeftRear>joint_left_back_wheel</LeftRear>
+      <RightRear>joint_right_back_wheel</RightRear>
+
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      
+      <torque>10</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <broadcastTF>50</broadcastTF>
+      <isRollerModel>true</isRollerModel>
+      <publishWheelJointState>true</publishWheelJointState>
+      <publishWheelTF>true</publishWheelTF>
+	</plugin>
+  </gazebo>
+
+<gazebo>
+      <plugin name="gazebo_mecanum_pid_plugin" filename="libgazebo_ros_mecanum_pid_drive.so">
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <robotBaseFrame>base_link</robotBaseFrame>
+
+        <LeftFront>joint_left_front_wheel</LeftFront>
+        <RightFront>joint_right_front_wheel</RightFront>
+        <LeftRear>joint_left_back_wheel</LeftRear>
+        <RightRear>joint_right_back_wheel</RightRear>
+
+        <odometryRate>20</odometryRate> 
+     
+        <publishWheelTF>true</publishWheelTF>
+        <publishWheelJointState>true</publishWheelJointState>
+        <WheelTorque>10</WheelTorque>
+
+        <WheelSeparationW>0.5</WheelSeparationW>
+        <WheelSeparationL>0.6</WheelSeparationL>
+        <wheelAccel>5</wheelAccel>
+        <wheelDiameter>0.2</wheelDiameter>
+        <publishOdom>false</publishOdom>
+        <isRollerModel>true</isRollerModel>
+        <dt>0.05</dt>
+        <WheelInputVelTopic>zm_input_vel</WheelInputVelTopic>
+        <WheelOutputVelTopic>zm_output_vel</WheelOutputVelTopic>
+        <WheelPID>gazebo_mecanum_plugins_PID</WheelPID>
+      </plugin>
+</gazebo>
+</robot>

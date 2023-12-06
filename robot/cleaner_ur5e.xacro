@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<robot name="cleaner" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_cleaner)/robot/materials.xacro" />
+  <xacro:include filename="$(find robot_cleaner)/robot/cleaner_wheels.gazebo" />
+  <xacro:include filename="$(find robot_cleaner)/robot/wheels.xacro" />
+  <xacro:include filename="$(find robot_cleaner)/robot/ur_macro.xacro"/>
+
+  <link name="link_chassis">
+    <!-- pose and inertial -->
+    <pose>0 0 0.1 0 0 0</pose>
+    <inertial>
+      <mass value="500"/>
+      <origin rpy="0 0 0" xyz="0 0 0.1"/>
+     <inertia ixx="3.253" ixy="0.0" ixz="0.0"
+               iyy="3.253" iyz="0.0" 
+               izz="3.253" />
+    </inertial>
+    <!-- body -->
+    <collision name="collision_chassis">
+      <geometry>
+        <box size="0.6 0.4 0.2"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.4 0.3"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+  </link>
+
+   <!-- Onmi wheels -->
+  <xacro:link_right_wheel name="link_right_front_wheel" />
+  <xacro:joint_right_wheel name="joint_right_front_wheel" child="link_right_front_wheel" origin_xyz="-0.3 0.26 -0.15" />
+
+  <xacro:link_left_wheel name="link_left_front_wheel" />
+  <xacro:joint_left_wheel name="joint_left_front_wheel" child="link_left_front_wheel" origin_xyz="-0.3 -0.26 -0.15" />
+
+  <xacro:link_right_wheel name="link_right_back_wheel" />
+  <xacro:joint_right_wheel name="joint_right_back_wheel" child="link_right_back_wheel" origin_xyz="0.3 0.26 -0.15" />
+
+  <xacro:link_left_wheel name="link_left_back_wheel" />
+  <xacro:joint_left_wheel name="joint_left_back_wheel" child="link_left_back_wheel" origin_xyz="0.3 -0.26 -0.15" />
+  
+  <!-- UR robot arm add -->
+  <!--Declare arguments -->
+  <xacro:arg name="joint_limit_params" default=""/>
+  <xacro:arg name="physical_params" default=""/>
+  <xacro:arg name="kinematics_params" default=""/>
+  <xacro:arg name="visual_params" default=""/>
+  <!--
+    legal values:
+      - hardware_interface/PositionJointInterface
+      - hardware_interface/VelocityJointInterface
+      - hardware_interface/EffortJointInterface
+
+    NOTE: this value must correspond to the controller configured in the
+          controller .yaml files in the 'config' directory.
+  -->
+  <xacro:arg name="transmission_hw_interface" default="hardware_interface/EffortJointInterface"/>
+  <xacro:arg name="safety_limits" default="false"/>
+  <xacro:arg name="safety_pos_margin" default="0.15"/>
+  <xacro:arg name="safety_k_position" default="20"/>
+
+  <!-- Instantiate the Gazebo robot and pass it all the required arguments. -->
+  <xacro:ur_robot_gazebo
+    prefix=""
+    joint_limits_parameters_file="$(arg joint_limit_params)"
+    kinematics_parameters_file="$(arg kinematics_params)"
+    physical_parameters_file="$(arg physical_params)"
+    visual_parameters_file="$(arg visual_params)"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+    safety_limits="$(arg safety_limits)"
+    safety_pos_margin="$(arg safety_pos_margin)"
+    safety_k_position="$(arg safety_k_position)"
+  />
+
+  <!--
+    Attach the Robot Arm to Manipulator
+  -->
+  <joint name="link_chassis_joint" type="fixed">
+    <parent link="link_chassis"/>
+    <child link="base_link"/>
+    <origin xyz="0.1 0.0 0.15" rpy="0 0 0"/>
+  </joint>
+
+  <!--
+    Attach the Gazebo model to Gazebo's world frame.
+
+    Note: if you're looking to integrate a UR into a larger scene and need
+    to add EEFs or other parts, DO NOT change this file or the 'world' link
+    here. Create a NEW xacro instead and decide whether you need to add
+    a 'world' link there.
+  -->
+  <!-- <link name="world"/>
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint> -->
+
+  <link name="tool0_controller"/>
+  <joint name="tool_controller_fake_joint" type="fixed">
+    <parent link="tool0"/>
+    <child link="tool0_controller"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  
+
+</robot>
