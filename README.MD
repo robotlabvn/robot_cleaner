@@ -1,9 +1,9 @@
 # ROBOT CLEANER ROS PACKAGE
-This is robot_cleaner ROS package for demonstration a mobile manipulator cleaning the toilet
+This is ``robot_cleaner`` ROS package for demonstration a mobile manipulator cleaning the toilet.
 ![robot cleaner](./fig/robot_cleaner_01.png)
 
 ## Moveit
-This is robot_cleaner ROS package for demonstration a mobile manipulator cleaning the toilet
+MoveIt is a widely used motion planning framework for the ROS (Robot Operating System) software. There are tutorials and resources available for setting up MoveIt with UR5e robots, including the UR5, which involve launching MoveIt nodes for motion planning and RViz for visualization.
 ![robot cleaner Moveit](./fig/robot_cleaner_2.png)
 
 ## 1. Install ROS packages
