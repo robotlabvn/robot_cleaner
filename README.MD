@@ -4,7 +4,7 @@ This is robot_cleaner ROS package for demonstration a mobile manipulator cleanin
 
 ## Moveit
 This is robot_cleaner ROS package for demonstration a mobile manipulator cleaning the toilet
-![robot cleaner Moveit](./fig/robot_cleaner_02.png)
+![robot cleaner Moveit](./fig/robot_cleaner_2.png)
 
 ## 1. Install ROS packages
 -  Install gazebo_mecanum_plugins: https://github.com/qaz9517532846/gazebo_mecanum_plugins
