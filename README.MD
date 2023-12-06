@@ -8,7 +8,7 @@ Project have done the steps below:
 - **Set up Gazebo:** Gazebo is a well-known open-source robotics simulator. You can install Gazebo by following the instructions on the Gazebo website. :heavy_check_mark:  **Done**
 - **Create a ROS Package:** Use the catkin_create_pkg command to create a new ROS package. This package will contain all the necessary files for your project. :heavy_check_mark:  **Done**
 - **Write ROS Nodes:** Write ROS nodes to control the autonomous mobile manipulator robot arm. You can use the ROS client library to communicate with the robot arm and send it commands. :heavy_check_mark:  **Done**
-- **Use Gazebo for Simulation:** Use Gazebo to simulate the robot arm and test your ROS nodes. Gazebo allows you to create a virtual environment for your robot arm and test its behavior in different scenarios.:heavy_check_mark:  **Done**
+- **Use Gazebo for Simulation:** Use Gazebo to simulate the robot arm and test your ROS nodes. Gazebo allows you to create a virtual environment for your robot arm and test its behavior in different scenarios. :heavy_check_mark:  **Done**
 - **Use ROS Planners:** Use ROS motion planning OMPL libraries,, to generate appropriate paths for the robot arm. MoveIt provides tools for motion planning, kinematics. :heavy_check_mark:  **Done**
 - **Tap into External Resources** that you can use in your project. :heavy_check_mark:  **Done**
 
